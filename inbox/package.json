@@ -4,11 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "contracts": "copyfiles src/**/*.sol  dist/ -u 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^10.3.5",
+    "copyfiles": "^2.0.0",
     "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "solc": "^0.4.24"
   }
 }
