@@ -5,6 +5,8 @@
 
 inbox/node_modules
 
+inbox/dist
+
 
 # CMake
 cmake-build-*/
