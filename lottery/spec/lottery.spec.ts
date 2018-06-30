@@ -26,5 +26,9 @@ describe('Lottery', () => {
             });
 
     });
+
+    it('deploys a contract', () => {
+        expect(lottery.options.address).toBeTruthy();
+    });
 });
 
