@@ -3,9 +3,9 @@
 
 .idea/
 
-inbox/node_modules
+**/node_modules
 
-inbox/dist
+**/dist
 
 
 # CMake
