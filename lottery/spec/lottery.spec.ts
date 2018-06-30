@@ -70,5 +70,55 @@ describe('Lottery', () => {
         expect(accounts[2]).toEqual(players[2]);
         expect(players.length).toEqual(3);
     });
+
+    it('requires a minimum amount of ether to enter', async () => {
+        let err;
+        try {
+            await lottery.methods.enter().send({
+                from: accounts[0],
+                value: 1
+            });
+        } catch (error) {
+            err = error;
+        }
+        expect(err).toBeTruthy();
+    });
+
+    it('only manager can call pickWinner', async () => {
+        let err;
+        try {
+            await lottery.methods.pickWinner().send({
+                from: accounts[1]
+            });
+        } catch (error) {
+            err = error;
+        }
+        expect(err).toBeTruthy();
+    });
+
+    it('sends money to the winner and resets the player array', async () => {
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei('2', 'ether')
+        });
+
+        const initialBalance = await web3.eth.getBalance(accounts[0]);
+        await lottery.methods.pickWinner().send({from: accounts[0]});
+        const finalBalance = await web3.eth.getBalance(accounts[0]);
+
+        expect(finalBalance).toBeGreaterThan(initialBalance);
+
+        const players = await lottery.methods.getPlayers().call({
+            from: accounts[0]
+        });
+
+        expect(players.length).toEqual(0);
+
+        const lotteryBalance= await web3.eth.getBalance(lottery.options.address);
+
+        // Added a '+'-sign, because for some reason lotteryBalance
+        // is a string containing a number, so we have to convert it.
+        expect(+lotteryBalance).toEqual(0);
+    })
 });
 
