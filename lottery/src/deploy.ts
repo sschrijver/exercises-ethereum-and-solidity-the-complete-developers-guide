@@ -20,6 +20,7 @@ const deploy = async () => {
         .deploy({data: '0x' + compile.bytecode, arguments: []})
         .send({gas: 1000000, from: accounts[0]});
 
+    console.log(compile.interface);
     console.log('Contract deployed to', result.options.address);
 };
 
