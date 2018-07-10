@@ -1,0 +1,17 @@
+{
+  "name": "kickstart-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^4.1.4",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
